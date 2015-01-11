@@ -22,7 +22,7 @@ class ProductTest < ActiveSupport::TestCase
       product.errors[:price]
 
     product.price = 0
-    assert prduct.invalid?
+    assert product.invalid?
     assert_equal ["must be greater than or equal to 0.01"],
       product.errors[:price]
 
@@ -34,7 +34,7 @@ class ProductTest < ActiveSupport::TestCase
     Product.new(
       title:    "my book title",
       description: "yyy",
-      price:        1;
+      price:        1,
       image_url:    image_url)
   end
 
@@ -45,8 +45,10 @@ class ProductTest < ActiveSupport::TestCase
     bad = %w{ fred.doc fred.gif/more fred.gif.more}
     ok.each do |name|
       assert new_product(name).valid?, "#{name} should be valid"
+    end
     bad.each do |name|
       assert new_product(name).invalid?, "#{name} shouldn't be valid"
+    end
   end
 
   test "product is not valid without a unique title" do
